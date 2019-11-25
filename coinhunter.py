@@ -127,6 +127,7 @@ class coin_scraper:
             if url not in self.scraped_pages:
                 self.to_crawl.put({"url": url, "depth": depth + 1})
 
+
     def scrape_page(self, target):
         url = target["url"]
         depth = target["depth"]
@@ -164,12 +165,10 @@ class coin_scraper:
             except KeyboardInterrupt:
                 log.info("Received keyboard interrupt, exiting...")
                 log.info(
-                    f"At time of interrupt, {len(self.scraped_pages)} pages were scanned."
+                    f"At time of interrupt, {len(self.scraped_pages)}"
+                    f" pages were scanned and {self.miner_count} miners were found."
                 )
                 exit()
-
-            if len(self.scraped_pages) % 100 == 0:
-                log.info(f"{len(self.scraped_pages)} pages scanned.")
 
 
 if __name__ == "__main__":
